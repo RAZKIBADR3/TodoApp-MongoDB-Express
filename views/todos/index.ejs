@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- title -->
+    <title><%= title %></title>
+    <!-- css -->
+    <link rel="stylesheet" href="/BS5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container p-3">
+        <h2 class="text-capitalize my-3"><%= title %></h2>
+        <p class="text-danger" style="position: absolute;top:20px;left:45%"><%= locals.msg %></p>
+        <!-- <div class="d-flex justify-content-between my-2">
+            <h4>Welcome <%= locals.username %></h4>
+            <div class="col-3 border d-flex justify-content-evenly">
+                <a href="/users/login" class="my-2 col-5 px-4 btn btn-dark text-capitalize">Login</a>
+                <a href="/users/logout" onclick="return confirm('do you really wanna log out')" class="my-2 col-5 px-4 btn btn-danger text-capitalize">Logout</a>
+            </div>
+        </div> -->
+        <a href="/todos/create" class="my-2 px-2 btn btn-primary text-capitalize">add todo</a>
+        <table class="table table-striped mt-2">
+            <thead class="bg-dark text-light">
+                <tr>
+                    <th>#</th>
+                    <th>text</th>
+                    <th>date</th>
+                    <th>user</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% todos.map( (todo,i) => { %>
+                    <tr>
+                        <td><%= i+1 %></td>
+                        <td><%= todo.text %></td>
+                        <td><%= todo.date %></td>
+                        <td><%= todo.user_id %></td>
+                        <td>
+                            <a onclick="return confirm('do you really wanna delete this todo ')" href=<%= '/todos/destroy/'+todo._id %> class="col-3 my-2 btn btn-danger">Delete</a>
+                            <a href=<%= '/todos/edit/'+todo._id %> class="col-3 my-2 btn btn-warning">Edit</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
